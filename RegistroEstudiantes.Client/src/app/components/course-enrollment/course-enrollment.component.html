@@ -1,0 +1,63 @@
+<div class="p-6">
+    <div class="header-section mb-6 flex justify-between items-center">
+        <div>
+            <h2 class="text-2xl font-bold text-gray-800">Inscripción de Materias</h2>
+        </div>
+
+        <mat-chip-set>
+            <mat-chip [class.chip-warn]="enrollmentCount() >= 3" [class.chip-primary]="enrollmentCount() < 3">
+                Materias: {{ enrollmentCount() }} / 3
+            </mat-chip>
+            <mat-chip color="accent" selected>
+                Créditos: {{ totalCredits() }} / 9
+            </mat-chip>
+        </mat-chip-set>
+    </div>
+
+    <hr class="mb-6">
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        @for (course of allCourses(); track course.id) {
+        <mat-card class="course-card border-t-4 border-blue-600 shadow-md" [class.opacity-75]="isProcessing()">
+            <mat-card-header>
+                <div mat-card-avatar>
+                    <mat-icon class="text-gray-600">school</mat-icon>
+                </div>
+                <mat-card-title class="font-semibold">{{ course.name }}</mat-card-title>
+                <mat-card-subtitle>Prof: {{ course.professorName }}</mat-card-subtitle>
+            </mat-card-header>
+
+            <mat-card-content class="mt-4">
+                <div class="flex items-center gap-2 text-sm text-gray-600">
+                    <mat-icon class="scale-75">star</mat-icon>
+                    <span>Esta materia otorga <strong>3 créditos</strong>.</span>
+                </div>
+            </mat-card-content>
+
+            <mat-card-actions align="end" class="bg-gray-50 mt-2">
+                @if (isAlreadyEnrolled(course.id)) {
+                <button mat-button disabled class="!text-green-600">
+                    <mat-icon>check_circle</mat-icon> Inscrito
+                </button>
+
+                <button mat-flat-button color="warn" class="!bg-red-500" [disabled]="isProcessing()"
+                    (click)="onCancel(course.id)">
+                    <mat-icon>{{ isProcessing() ? 'sync' : 'cancel' }}</mat-icon>
+                    {{ isProcessing() ? 'Espere...' : 'Cancelar' }}
+                </button>
+                } @else {
+                <button mat-raised-button color="primary" [disabled]="enrollmentCount() >= 3 || isProcessing()"
+                    (click)="onEnroll(course)">
+                    <mat-icon class="{{ isProcessing() ? 'animate-spin' : '' }}">
+                        {{ isProcessing() ? 'sync' : 'add_circle' }}
+                    </mat-icon>
+                    {{ isProcessing() ? 'Procesando...' : 'Incribir' }}
+                </button>
+                }
+            </mat-card-actions>
+        </mat-card>
+        } @empty {
+        <p class="text-center col-span-full py-10 text-gray-400">No hay materias disponibles.</p>
+        }
+    </div>
+</div>

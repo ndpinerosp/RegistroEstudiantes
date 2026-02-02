@@ -1,0 +1,39 @@
+# .gitignore para un proyecto combinado de Angular + .NET
+
+# Node.js (Angular)
+node_modules/
+dist/
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+
+# Directorios de dependencias de npm y otros archivos relacionados
+package-lock.json
+yarn.lock
+
+# .NET
+bin/
+obj/
+.vs/
+.idea/
+
+# Archivos específicos de usuario de Visual Studio y JetBrains
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Logs
+*.log
+
+# Archivos de configuración local
+appsettings.Development.json
+secrets.json
+
+# Archivos generados por el sistema operativo
+.DS_Store           # macOS
+Thumbs.db           # Windows
+
+# Otros archivos específicos de plataformas
+.vscode/
+.idea/

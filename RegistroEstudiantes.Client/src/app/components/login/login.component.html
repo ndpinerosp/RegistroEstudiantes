@@ -1,0 +1,63 @@
+<div class="min-h-[calc(100vh-80px)] flex items-center justify-center bg-[#f8fafc] p-6">
+  <mat-card
+    class="w-full max-w-[450px] !bg-white !rounded-[2rem] !shadow-[0_20px_50px_rgba(0,0,0,0.05)] !border-none overflow-hidden">
+
+    <div class="pt-10 pb-6 flex flex-col items-center">
+      <div class="bg-primary/10 p-4 rounded-2xl mb-4 text-primary">
+        <mat-icon class="!w-10 !h-10 !text-[40px] flex items-center justify-center">school</mat-icon>
+      </div>
+      <h2 class="text-2xl font-bold text-slate-800 tracking-tight">¡Bienvenido de nuevo!</h2>
+      <p class="text-slate-500 font-light">Ingresa tus credenciales para continuar</p>
+    </div>
+
+    <mat-card-content class="!px-8 !pb-10">
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="flex flex-col gap-5">
+
+        <div class="flex flex-col gap-1.5">
+          <label class="text-xs font-bold uppercase tracking-widest text-slate-400 ml-1">Correo Electrónico</label>
+          <mat-form-field appearance="outline" class="!w-full custom-field">
+            <mat-icon matPrefix class="text-slate-400 mr-2">mail_outline</mat-icon>
+            <input matInput formControlName="email" placeholder="ejemplo@correo.com">
+            @if (loginForm.get('email')?.hasError('email')) {
+            <mat-error>Correo no válido</mat-error>
+            }
+          </mat-form-field>
+        </div>
+
+        <div class="flex flex-col gap-1.5">
+          <label class="text-xs font-bold uppercase tracking-widest text-slate-400 ml-1">Contraseña</label>
+          <mat-form-field appearance="outline" class="!w-full custom-field">
+            <mat-icon matPrefix class="text-slate-400 mr-2">lock_open</mat-icon>
+            <input matInput formControlName="password" type="password">
+            @if (loginForm.get('password')?.hasError('required')) {
+            <mat-error>Requerido</mat-error>
+            }
+          </mat-form-field>
+        </div>
+
+        <button mat-flat-button color="primary" type="submit" [disabled]="loginForm.invalid || isLoading()"
+          class="!h-14 !rounded-2xl !text-lg !font-bold shadow-lg shadow-blue-200 transition-all hover:scale-[1.01] active:scale-95 disabled:grayscale">
+
+          <div class="flex items-center justify-center gap-3">
+            @if (isLoading()) {
+            <mat-spinner diameter="24" strokeWidth="3" color="accent"></mat-spinner>
+            <span>Autenticando...</span>
+            } @else {
+            <span>Iniciar Sesión</span>
+            }
+          </div>
+        </button>
+
+      </form>
+    </mat-card-content>
+
+    <mat-card-footer class="!bg-slate-50/50 !p-6 border-t border-slate-100 flex justify-center">
+      <p class="text-slate-500 text-sm">
+        ¿Aún no tienes acceso?
+        <a routerLink="/register" class="text-primary font-bold hover:underline underline-offset-4">
+          Crea una cuenta
+        </a>
+      </p>
+    </mat-card-footer>
+  </mat-card>
+</div>

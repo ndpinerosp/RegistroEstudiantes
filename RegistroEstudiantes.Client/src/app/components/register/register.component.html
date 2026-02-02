@@ -1,0 +1,87 @@
+<div class="min-h-[calc(100vh-80px)] flex items-center justify-center bg-[#f8fafc] p-6">
+
+  <mat-card
+    class="w-full max-w-[500px] !bg-white !rounded-[2.5rem] !shadow-[0_20px_60px_rgba(0,0,0,0.07)] !border-none overflow-hidden">
+
+    <div class="pt-10 pb-4 flex flex-col items-center">
+      <div class="bg-indigo-50 p-4 rounded-2xl mb-4 text-primary">
+        <mat-icon class="!w-10 !h-10 !text-[40px] flex items-center justify-center">person_add_alt</mat-icon>
+      </div>
+      <h2 class="text-2xl font-bold text-slate-800 tracking-tight">Registro de Estudiante</h2>
+      <p class="text-slate-500 font-light px-8 text-center">Crea tu cuenta para comenzar a inscribir tus materias</p>
+    </div>
+
+    <mat-card-content class="!px-10 !pb-10 mt-4">
+      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="flex flex-col gap-4">
+
+        <div class="flex flex-col gap-1.5">
+          <label class="text-[10px] font-bold uppercase tracking-[0.15em] text-slate-400 ml-1">Nombres</label>
+          <mat-form-field appearance="outline" class="!w-full custom-field">
+            <mat-icon matPrefix class="text-slate-400 mr-2">badge</mat-icon>
+            <input matInput formControlName="name" placeholder="Nombres">
+            @if (registerForm.get('name')?.invalid && registerForm.get('name')?.touched) {
+            <mat-error>El nombre es requerido</mat-error>
+            }
+          </mat-form-field>
+        </div>
+
+        <div class="flex flex-col gap-1.5">
+          <label class="text-[10px] font-bold uppercase tracking-[0.15em] text-slate-400 ml-1">Apellidos</label>
+          <mat-form-field appearance="outline" class="!w-full custom-field">
+            <mat-icon matPrefix class="text-slate-400 mr-2">badge</mat-icon>
+            <input matInput formControlName="lastName" placeholder="Apellidos">
+            @if (registerForm.get('lastName')?.invalid && registerForm.get('lastName')?.touched) {
+            <mat-error>El apellido es requerido</mat-error>
+            }
+          </mat-form-field>
+        </div>
+
+        <div class="flex flex-col gap-1.5">
+          <label class="text-[10px] font-bold uppercase tracking-[0.15em] text-slate-400 ml-1">Correo
+            Institucional</label>
+          <mat-form-field appearance="outline" class="!w-full custom-field">
+            <mat-icon matPrefix class="text-slate-400 mr-2">mail_outline</mat-icon>
+            <input matInput formControlName="email" type="email" placeholder="Email">
+            @if (registerForm.get('email')?.invalid && registerForm.get('email')?.touched) {
+            <mat-error>Email inválido</mat-error>
+            }
+          </mat-form-field>
+        </div>
+
+        <div class="flex flex-col gap-1.5">
+          <label class="text-[10px] font-bold uppercase tracking-[0.15em] text-slate-400 ml-1">Contraseña</label>
+          <mat-form-field appearance="outline" class="!w-full custom-field">
+            <mat-icon matPrefix class="text-slate-400 mr-2">lock_open</mat-icon>
+            <input matInput formControlName="password" type="password">
+            @if (registerForm.get('password')?.invalid && registerForm.get('password')?.touched) {
+            <mat-error>Mínimo 6 caracteres</mat-error>
+            }
+          </mat-form-field>
+        </div>
+
+        <button mat-flat-button color="primary" type="submit" [disabled]="registerForm.invalid || isLoading()"
+          class="!h-14 !mt-4 !rounded-2xl !text-lg !font-bold shadow-xl shadow-blue-100 transition-all hover:scale-[1.01] active:scale-95 disabled:grayscale">
+
+          <div class="flex items-center justify-center gap-3">
+            @if (isLoading()) {
+            <mat-spinner diameter="24" strokeWidth="3" color="accent"></mat-spinner>
+            <span>Creando cuenta...</span>
+            } @else {
+            <span>Registrarme ahora</span>
+            }
+          </div>
+        </button>
+
+      </form>
+    </mat-card-content>
+
+    <mat-card-footer class="!bg-slate-50/80 !p-8 border-t border-slate-100 text-center">
+      <span class="text-slate-500 text-sm">¿Ya estás registrado?</span>
+      <a routerLink="/login"
+        class="ml-2 text-primary font-bold hover:underline decoration-2 underline-offset-4 transition-all">
+        Inicia Sesión
+      </a>
+    </mat-card-footer>
+
+  </mat-card>
+</div>
