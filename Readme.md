@@ -54,6 +54,6 @@ El proyecto se divide en dos carpetas principales:
 }
 
 ```
-5. Ejecuta angular con el comando ng serve
+5. Ejecuta angular con el comando ng serve y verifica que quede con el puerto 4200
 
-Adjunto se encentran los scripts SQl para creacion y cargue de datos.
+Adjunto se encuentran los scripts SQL para creacion y cargue de datos.
